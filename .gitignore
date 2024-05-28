@@ -36,3 +36,12 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# 忽略 .idea 目录
+.idea/
+
+# 忽略所有 .gitignore 文件，如果你确实需要这样做（通常不推荐，因为.gitignore很重要）
+*.gitignore
+
+# 通常不需要忽略.gitignore，除非有特殊需求
+# 直接列出不需要版本控制的文件和目录类型
