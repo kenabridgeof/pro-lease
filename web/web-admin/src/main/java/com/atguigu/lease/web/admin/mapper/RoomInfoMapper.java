@@ -14,10 +14,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 */
 public interface RoomInfoMapper extends BaseMapper<RoomInfo> {
 
-    IPage<RoomItemVo> pageItem(IPage<RoomItemVo> page, RoomQueryVo queryVo);
-
-    RoomInfo selectRoomById(Long roomId);
-
 }
 
 

@@ -13,5 +13,4 @@ import java.util.List;
 */
 public interface AttrKeyService extends IService<AttrKey> {
 
-    List<AttrKeyVo> listAttrInfo();
 }

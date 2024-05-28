@@ -1,12 +1,12 @@
 package com.atguigu.lease.web.admin.controller.apartment;
 
 
-import com.atguigu.lease.common.annotation.CheckPermission;
 import com.atguigu.lease.common.result.Result;
 import com.atguigu.lease.model.entity.LeaseTerm;
 import com.atguigu.lease.web.admin.service.LeaseTermService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,28 +18,54 @@ import java.util.List;
 public class LeaseTermController {
 
     @Autowired
-    private LeaseTermService service;
+    private LeaseTermService leaseTermService;
 
     @GetMapping("list")
     @Operation(summary = "查询全部租期列表")
     public Result<List<LeaseTerm>> listLeaseTerm() {
-        List<LeaseTerm> list = service.list();
+        List<LeaseTerm> list = leaseTermService.list();
         return Result.ok(list);
     }
 
-    @CheckPermission
+   /* List<LeaseTerm> selectAll();
+
+    <select id="selectAll" resultType="com.atguigu.lease.model.entity.LeaseTerm">
+    SELECT * FROM lease_term
+    </select>*/
+
     @PostMapping("saveOrUpdate")
     @Operation(summary = "保存或更新租期信息")
     public Result saveOrUpdate(@RequestBody LeaseTerm leaseTerm) {
-        service.saveOrUpdate(leaseTerm);
+        leaseTermService.saveOrUpdate(leaseTerm);
         return Result.ok();
     }
 
-    @CheckPermission
+   /* int insert(LeaseTerm leaseTerm);
+    int update(LeaseTerm leaseTerm);
+
+    <insert id="insert" parameterType="com.atguigu.lease.model.entity.LeaseTerm">
+    INSERT INTO lease_term (name, duration, description)
+    VALUES (#{name}, #{duration}, #{description})
+    </insert>
+
+    <update id="update" parameterType="com.atguigu.lease.model.entity.LeaseTerm">
+    UPDATE lease_term
+    SET name = #{name},
+    duration = #{duration},
+    description = #{description}
+    WHERE id = #{id}
+    </update>*/
+
     @DeleteMapping("deleteById")
     @Operation(summary = "根据ID删除租期")
     public Result deleteLeaseTermById(@RequestParam Long id) {
-        service.removeById(id);
+        leaseTermService.removeById(id);
         return Result.ok();
     }
+
+    /*int deleteLeaseTermById(@Param("id") Long id);
+
+    <delete>
+       delete from lease_term where id = #{id}
+    </delete>*/
 }
